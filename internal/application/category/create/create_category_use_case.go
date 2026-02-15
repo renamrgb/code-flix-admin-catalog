@@ -16,7 +16,7 @@ type CreateCategoryInput struct {
 }
 
 type CreateCategoryOutput struct {
-	ID category.CategoryID
+	ID string
 }
 
 func NewCreateCategoryUseCase(gateway category.CategoryGateway) *CreateCategoryUseCase {
@@ -45,6 +45,6 @@ func (uc *CreateCategoryUseCase) Execute(input CreateCategoryInput) (*CreateCate
 	}
 
 	return &CreateCategoryOutput{
-		ID: cat.ID,
+		ID: cat.ID.String(),
 	}, nil
 }
