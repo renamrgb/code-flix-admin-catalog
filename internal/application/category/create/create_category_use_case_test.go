@@ -56,7 +56,7 @@ func TestCreateCategoryUseCaseExecute(t *testing.T) {
 		t.Fatal("expected output")
 	}
 
-	if output.ID == (category.CategoryID{}) {
+	if output.ID == "" {
 		t.Fatal("expected valid category ID")
 	}
 }

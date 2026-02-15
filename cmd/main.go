@@ -37,8 +37,7 @@ func main() {
 
 	log.Println("Migrations executed successfully")
 
-	var gateway category.CategoryGateway
-	gateway = persistence.NewMySQLCategoryGateway(db)
+	var gateway category.CategoryGateway = persistence.NewMySQLCategoryGateway(db)
 
 	createUseCase := createUC.NewCreateCategoryUseCase(gateway)
 	updateUseCase := updateUC.NewUpdateCategoryUseCase(gateway)
