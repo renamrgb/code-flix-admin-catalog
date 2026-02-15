@@ -8,7 +8,6 @@ import (
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/joho/godotenv"
 )
 
 type Config struct {
@@ -24,7 +23,6 @@ type Config struct {
 }
 
 func LoadConfigFromEnv() (Config, error) {
-	_ = godotenv.Load()
 
 	port, err := strconv.Atoi(getEnv("DB_PORT", "3306"))
 	if err != nil {

@@ -7,7 +7,6 @@ type CategoryGateway interface {
 	GetCategoryByID(id CategoryID) (*Category, error)
 	UpdateCategory(category *Category) (*Category, error)
 	DeleteCategory(id CategoryID) error
-
 	FindAll(query SearchCategoryQuery) (*pagination.Pagination[Category], error)
 }
 

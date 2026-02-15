@@ -4,10 +4,11 @@ import (
 	"log"
 	"net/http"
 
-	createUC "github.com/renamrgb/code-flix-admin-catalog/internal/application/category/create"
-	deleteUC "github.com/renamrgb/code-flix-admin-catalog/internal/application/category/delete"
-	retriveUC "github.com/renamrgb/code-flix-admin-catalog/internal/application/category/retrive"
-	updateUC "github.com/renamrgb/code-flix-admin-catalog/internal/application/category/update"
+	"github.com/joho/godotenv"
+	createCategoryUC "github.com/renamrgb/code-flix-admin-catalog/internal/application/category/create"
+	deleteCategoryUC "github.com/renamrgb/code-flix-admin-catalog/internal/application/category/delete"
+	retriveCategoryUC "github.com/renamrgb/code-flix-admin-catalog/internal/application/category/retrive"
+	updateCategoryUC "github.com/renamrgb/code-flix-admin-catalog/internal/application/category/update"
 
 	categoryHTTP "github.com/renamrgb/code-flix-admin-catalog/internal/infrastructure/interfaces/http"
 
@@ -19,6 +20,7 @@ import (
 )
 
 func main() {
+	_ = godotenv.Load()
 	cfg, err := mysql.LoadConfigFromEnv()
 	if err != nil {
 		log.Fatalf("error loading config: %v", err)
@@ -39,11 +41,11 @@ func main() {
 
 	var gateway category.CategoryGateway = persistence.NewMySQLCategoryGateway(db)
 
-	createUseCase := createUC.NewCreateCategoryUseCase(gateway)
-	updateUseCase := updateUC.NewUpdateCategoryUseCase(gateway)
-	deleteUseCase := deleteUC.NewDeleteCategoryUseCase(gateway)
-	getByIDUseCase := retriveUC.NewGetCategoryByIDUseCase(gateway)
-	listUseCase := retriveUC.NewListCategoriesUseCase(gateway)
+	createUseCase := createCategoryUC.NewCreateCategoryUseCase(gateway)
+	updateUseCase := updateCategoryUC.NewUpdateCategoryUseCase(gateway)
+	deleteUseCase := deleteCategoryUC.NewDeleteCategoryUseCase(gateway)
+	getByIDUseCase := retriveCategoryUC.NewGetCategoryByIDUseCase(gateway)
+	listUseCase := retriveCategoryUC.NewListCategoriesUseCase(gateway)
 
 	handler := categoryHTTP.NewCategoryHandler(
 		createUseCase,
